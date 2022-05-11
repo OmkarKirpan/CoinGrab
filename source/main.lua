@@ -7,6 +7,8 @@ local gfx <const> = playdate.graphics
 
 local playerSprite = nil
 
+local playerSpeed = 4
+
 function initialize()
 	local playerImage = gfx.image.new('images/player')
 	playerSprite = gfx.sprite.new(playerImage)
@@ -26,5 +28,18 @@ end
 initialize()
 
 function playdate.update()
+	if playdate.buttonIsPressed(playdate.kButtonUp) then
+		playerSprite:moveBy(0, -playerSpeed)
+	end
+	if playdate.buttonIsPressed(playdate.kButtonRight) then
+		playerSprite:moveBy(playerSpeed, 0)
+	end
+	if playdate.buttonIsPressed(playdate.kButtonDown) then
+		playerSprite:moveBy(0, playerSpeed)
+	end
+	if playdate.buttonIsPressed(playdate.kButtonLeft) then
+		playerSprite:moveBy(-playerSpeed, 0)
+	end
+
 	gfx.sprite.update()
 end
